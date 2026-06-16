@@ -12,12 +12,14 @@ interface ActivitiesGalleryProps {
   activities: Activity[] | undefined;
   destinationTitle: string;
   themeColor: string;
+  selectedDate?: 'opcion1' | 'opcion2';
 }
 
-export default function ActivitiesGallery({ activities, destinationTitle, themeColor }: ActivitiesGalleryProps) {
+export default function ActivitiesGallery({ activities, destinationTitle, themeColor, selectedDate }: ActivitiesGalleryProps) {
   if (!activities || activities.length === 0) return null;
 
   const isCalafate = destinationTitle.toLowerCase().includes('calafate');
+  const isOption1 = selectedDate === 'opcion1' || !selectedDate;
 
   return (
     <motion.div
@@ -39,7 +41,7 @@ export default function ActivitiesGallery({ activities, destinationTitle, themeC
           Paseos mágicos que Juan planeó en {destinationTitle}
         </h3>
         <p className="text-xs md:text-sm text-neutral-500 font-sans mt-2 max-w-xl mx-auto leading-relaxed">
-          Haz clic en el destino para ver los detalles. Aquí puedes ver la belleza de las actividades que podrán compartir del 8 al 12 de Julio:
+          Haz clic en el destino para ver los detalles. Aquí puedes ver la belleza de las actividades que podrán compartir {isOption1 ? 'del 8 al 12 de Julio' : 'del 22 al 26 de Julio'}:
         </p>
       </div>
 

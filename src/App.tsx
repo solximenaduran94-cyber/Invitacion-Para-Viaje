@@ -223,6 +223,7 @@ export default function App() {
                 destinationDetails={currentDestinationDetails}
                 onReset={handleReset}
                 milagrosName={response.milagrosName}
+                selectedDate={response.selectedDate}
               />
             </motion.div>
           ) : (
@@ -309,17 +310,61 @@ export default function App() {
                   <p className="text-sm md:text-base text-neutral-600 font-serif leading-relaxed mb-4">
                     Juan quiere regalarte una escapada inolvidable. Cinco días suspendidos en el tiempo, 
                     entre paisajes australes, vientos puros y el abrigo de caminar juntos. 
-                    Las fechas ya están marcadas en las estrellas:
+                    Elige la fecha que te sea más conveniente:
                   </p>
 
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-6 my-6">
-                    <div className="flex items-center gap-2.5 px-4 py-3 bg-rose-50/50 rounded-2xl border border-rose-100 text-rose-800">
-                      <Calendar className="w-5 h-5 shrink-0" />
-                      <div className="text-left">
-                        <span className="text-[10px] uppercase tracking-wider block font-sans text-rose-500 font-bold">FECHA RECOMENDADA</span>
-                        <span className="text-sm font-semibold font-sans">Miércoles 08 al Domingo 12 de Julio, 2026</span>
+                  <div className="flex flex-col gap-4 my-6 w-full text-left">
+                    {/* Option 1: Finde Largo */}
+                    <button
+                      type="button"
+                      id="date-opt-1"
+                      onClick={() => {
+                        setResponse((prev) => ({ ...prev, selectedDate: 'opcion1' }));
+                        triggerHeartbeat();
+                      }}
+                      className={`flex items-start gap-4 p-4.5 rounded-2xl border text-left transition-all duration-300 cursor-pointer ${
+                        response.selectedDate === 'opcion1' || !response.selectedDate
+                          ? 'bg-rose-50/50 border-rose-300 text-rose-950 shadow-md ring-2 ring-rose-200'
+                          : 'bg-white/40 hover:bg-white/80 border-neutral-200 text-neutral-700'
+                      }`}
+                    >
+                      <Calendar className={`w-5 h-5 shrink-0 mt-0.5 ${
+                        response.selectedDate === 'opcion1' || !response.selectedDate ? 'text-rose-500' : 'text-neutral-400'
+                      }`} />
+                      <div>
+                        <span className="text-[10px] uppercase tracking-wider block font-sans font-bold text-rose-500">OPCIÓN 1 · FINDE LARGO ⭐</span>
+                        <span className="text-sm font-semibold font-sans block">Miércoles 08 al Domingo 12 de Julio, 2026</span>
+                        <span className="text-xs text-neutral-500 mt-1 block leading-normal">
+                          ¡Aprovechamos el feriado largo nacional! Solo tendrías que pedir <strong className="text-rose-700 font-semibold">1 día de trabajo</strong>.
+                        </span>
                       </div>
-                    </div>
+                    </button>
+
+                    {/* Option 2: Escapada Clásica */}
+                    <button
+                      type="button"
+                      id="date-opt-2"
+                      onClick={() => {
+                        setResponse((prev) => ({ ...prev, selectedDate: 'opcion2' }));
+                        triggerHeartbeat();
+                      }}
+                      className={`flex items-start gap-4 p-4.5 rounded-2xl border text-left transition-all duration-300 cursor-pointer ${
+                        response.selectedDate === 'opcion2'
+                          ? 'bg-rose-50/50 border-rose-300 text-rose-950 shadow-md ring-2 ring-rose-200'
+                          : 'bg-white/40 hover:bg-white/80 border-neutral-200 text-neutral-700'
+                      }`}
+                    >
+                      <Calendar className={`w-5 h-5 shrink-0 mt-0.5 ${
+                        response.selectedDate === 'opcion2' ? 'text-rose-500' : 'text-neutral-400'
+                      }`} />
+                      <div>
+                        <span className="text-[10px] uppercase tracking-wider block font-sans font-bold text-rose-500">OPCIÓN 2 · WINTER GETAWAY</span>
+                        <span className="text-sm font-semibold font-sans block">Miércoles 22 al Domingo 26 de Julio, 2026</span>
+                        <span className="text-xs text-neutral-500 mt-1 block leading-normal">
+                          Cinco días puros de invierno. Tendrías que pedir <strong className="text-rose-700 font-semibold">3 días de trabajo</strong>.
+                        </span>
+                      </div>
+                    </button>
                   </div>
 
                   <p className="text-xs text-neutral-400 font-sans italic">
@@ -328,7 +373,7 @@ export default function App() {
                 </div>
 
                 {/* Countdown Timer */}
-                <CountdownTimer />
+                <CountdownTimer selectedDate={response.selectedDate} />
               </div>
 
               {/* Cards Grid: Side-by-Side selector */}
@@ -355,6 +400,7 @@ export default function App() {
                   activities={currentDestinationDetails.activities}
                   destinationTitle={currentDestinationDetails.title}
                   themeColor={currentDestinationDetails.themeColor}
+                  selectedDate={response.selectedDate}
                 />
               )}
 
@@ -366,6 +412,7 @@ export default function App() {
                 onConfirm={handleConfirm}
                 destinationDetails={currentDestinationDetails}
                 milagrosName={response.milagrosName}
+                selectedDate={response.selectedDate}
               />
             </motion.div>
           )}

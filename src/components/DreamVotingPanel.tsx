@@ -15,6 +15,7 @@ interface DreamVotingPanelProps {
   onConfirm: () => void;
   destinationDetails: DestinationDetails | null;
   milagrosName: string;
+  selectedDate?: 'opcion1' | 'opcion2';
 }
 
 export default function DreamVotingPanel({
@@ -24,6 +25,7 @@ export default function DreamVotingPanel({
   onConfirm,
   destinationDetails,
   milagrosName,
+  selectedDate,
 }: DreamVotingPanelProps) {
   
   // Custom suggestion logs based on the destination
@@ -122,7 +124,7 @@ export default function DreamVotingPanel({
               
               <p className="text-sm md:text-base leading-relaxed px-2 md:px-6">
                 Acepto con todo mi corazón tu hermosa invitación. 
-                Siento que el mejor lugar para que vivamos esta escapada del <span className="font-semibold text-neutral-800">8 al 12 de Julio</span> es{' '}
+                Siento que el mejor lugar para que vivamos esta escapada del <span className="font-semibold text-neutral-800">{selectedDate === 'opcion2' ? '22 al 26 de Julio' : '8 al 12 de Julio'}</span> es{' '}
                 <span className={`font-semibold underline decoration-2 underline-offset-4 ${selectedDestination === 'calafate' ? 'text-sky-800 decoration-sky-400' : 'text-amber-800 decoration-amber-500'}`}>
                   {destinationDetails?.title}
                 </span>.

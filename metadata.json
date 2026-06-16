@@ -1,6 +1,6 @@
 {
   "name": "Un Viaje para Milagros",
-  "description": "Una invitación poética y romántica de Juan para Milagros, proponiendo una escapada del miércoles 8 de julio al domingo 12 de julio de 2026, a elegir entre El Calafate y Bariloche.",
+  "description": "Una invitación poética y romántica de Juan para Milagros, proponiendo una escapada a elegir entre El Calafate y Bariloche con dos opciones de fecha en julio de 2026.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

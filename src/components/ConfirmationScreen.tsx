@@ -14,6 +14,7 @@ interface ConfirmationScreenProps {
   destinationDetails: DestinationDetails;
   onReset: () => void;
   milagrosName: string;
+  selectedDate?: 'opcion1' | 'opcion2';
 }
 
 export default function ConfirmationScreen({
@@ -22,17 +23,23 @@ export default function ConfirmationScreen({
   destinationDetails,
   onReset,
   milagrosName,
+  selectedDate,
 }: ConfirmationScreenProps) {
   const [copied, setCopied] = useState(false);
+  const isOption1 = selectedDate === 'opcion1' || !selectedDate;
 
   // Poetic formulated message for WhatsApp
   const makeMessageText = () => {
     const destinationEmoji = selectedDestination === 'calafate' ? '❄️🏔️' : '🌲🍫';
     const destinationTitle = destinationDetails.title.toUpperCase();
     
+    const dateFormattedMsg = isOption1
+      ? 'del miércoles 8 al domingo 12 de Julio de 2026 (¡aprovechando el finde largo para pedir solo 1 día de trabajo!)'
+      : 'del miércoles 22 al domingo 26 de Julio de 2026 (pidiendo 3 días de trabajo)';
+
     let text = `¡Hola Juan! ❤️ He recibido tu hermosa invitación y acepto con todo mi corazón. 
 
-He elegido que hagamos nuestra escapada a *${destinationTitle}* ${destinationEmoji} del miércoles 8 al domingo 12 de Julio de 2026.
+He elegido que hagamos nuestra escapada a *${destinationTitle}* ${destinationEmoji} ${dateFormattedMsg}.
 
 ✨ *Mis sueños para este viaje son:* 
 "${dreams || 'Caminar de la mano contemplando los paisajes, vivir aventuras inolvidables y escribir un nuevo capítulo juntos.'}"
@@ -52,14 +59,12 @@ He elegido que hagamos nuestra escapada a *${destinationTitle}* ${destinationEmo
     const destinationEmoji = selectedDestination === 'calafate' ? '❄️🏔️' : '🌲🍫';
     const destinationTitle = destinationDetails.title.toUpperCase();
     
-    const plainText = `¡Hola Juan! ❤️ He recibido tu hermosa invitación y acepto con todo mi corazón. 
+    const isOption1 = selectedDate === 'opcion1' || !selectedDate;
+    const dateFormattedMsg = isOption1
+      ? 'del miércoles 8 al domingo 12 de Julio de 2026 (¡aprovechando el finde largo para pedir solo 1 día de trabajo!)'
+      : 'del miércoles 22 al domingo 26 de Julio de 2026 (pidiendo 3 días de trabajo)';
 
-He elegido que hagamos nuestra escapada a *${destinationTitle}* ${destinationEmoji} del miércoles 8 al domingo 12 de Julio de 2026.
-
-✨ *Mis sueños para este viaje son:* 
-"${dreams || 'Caminar de la mano contemplando los paisajes, vivir aventuras inolvidables y escribir un nuevo capítulo juntos.'}"
-
-¡Qué emoción inmensa empezar a planear y soñar con este viaje! Te amo muchísimo, nos vemos muy pronto en el sur. 🎒✈️`;
+    const plainText = `¡Hola Juan! ❤️ He recibido tu hermosa invitación y acepto con todo mi corazón. \n\nHe elegido que hagamos nuestra escapada a *${destinationTitle}* ${destinationEmoji} ${dateFormattedMsg}.\n\n✨ *Mis sueños para este viaje son:* \n"${dreams || 'Caminar de la mano contemplando los paisajes, vivir aventuras inolvidables y escribir un nuevo capítulo juntos.'}"\n\n¡Qué emoción inmensa empezar a planear y soñar con este viaje! Te amo muchísimo, nos vemos muy pronto en el sur. 🎒✈️`;
 
     navigator.clipboard.writeText(plainText).then(() => {
       setCopied(true);
@@ -158,14 +163,14 @@ He elegido que hagamos nuestra escapada a *${destinationTitle}* ${destinationEmo
                 <span className="text-[9px] font-sans text-neutral-400 tracking-wider uppercase block">Fecha de Salida</span>
                 <span className="text-sm font-semibold font-sans text-neutral-800 flex items-center gap-1">
                   <Calendar className="w-3.5 h-3.5 text-rose-500 shrink-0" />
-                  <span>Miércoles 08 Jul</span>
+                  <span>{isOption1 ? 'Miércoles 08 Jul' : 'Miércoles 22 Jul'}</span>
                 </span>
               </div>
               <div>
                 <span className="text-[9px] font-sans text-neutral-400 tracking-wider uppercase block">Fecha de Regreso</span>
                 <span className="text-sm font-semibold font-sans text-neutral-800 flex items-center gap-1">
                   <Calendar className="w-3.5 h-3.5 text-rose-500 shrink-0" />
-                  <span>Domingo 12 Jul</span>
+                  <span>{isOption1 ? 'Domingo 12 Jul' : 'Domingo 26 Jul'}</span>
                 </span>
               </div>
             </div>
@@ -196,7 +201,7 @@ He elegido que hagamos nuestra escapada a *${destinationTitle}* ${destinationEmo
             <div className="mt-4 p-4 rounded-xl bg-neutral-50 border border-neutral-100 text-left relative">
               <span className="text-[9px] font-sans text-neutral-400 tracking-widest uppercase block mb-1">Tus Sueños Seleccionados</span>
               <p className="text-xs text-neutral-600 font-sans italic leading-relaxed">
-                &ldquo;{dreams || 'Hacer nuestra escapada romántica del miércoles 8 al domingo 12 de Julio, abrigarnos juntos frente al imponente paisaje patagónico y escribir los más bellos sueños viajeros.'}&rdquo;
+                &ldquo;{dreams || `Hacer nuestra escapada romántica ${isOption1 ? 'del miércoles 8 al domingo 12 de Julio' : 'del miércoles 22 al domingo 26 de Julio'}, abrigarnos juntos frente al imponente paisaje patagónico y escribir los más bellos sueños viajeros.`}&rdquo;
               </p>
             </div>
 

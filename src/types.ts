@@ -11,6 +11,7 @@ export interface TravelResponse {
   confirmed: boolean;
   opened: boolean;
   milagrosName: string;
+  selectedDate?: 'opcion1' | 'opcion2';
 }
 
 export interface Activity {

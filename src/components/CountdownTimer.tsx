@@ -9,11 +9,17 @@ interface TimeLeft {
   seconds: number;
 }
 
-export default function CountdownTimer() {
-  const targetDate = new Date('2026-07-08T00:00:00');
+interface CountdownTimerProps {
+  selectedDate?: 'opcion1' | 'opcion2';
+}
 
-  const calculateTimeLeft = (): TimeLeft => {
-    const difference = targetDate.getTime() - new Date().getTime();
+export default function CountdownTimer({ selectedDate }: CountdownTimerProps) {
+  const targetDate = selectedDate === 'opcion2'
+    ? new Date('2026-07-22T00:00:00')
+    : new Date('2026-07-08T00:00:00');
+
+  const calculateTimeLeft = (target: Date): TimeLeft => {
+    const difference = target.getTime() - new Date().getTime();
     
     if (difference <= 0) {
       return { days: 0, hours: 0, minutes: 0, seconds: 0 };
@@ -27,15 +33,18 @@ export default function CountdownTimer() {
     };
   };
 
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft);
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => calculateTimeLeft(targetDate));
 
   useEffect(() => {
+    // Update immediately when targetDate / selectedDate changes
+    setTimeLeft(calculateTimeLeft(targetDate));
+
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
+      setTimeLeft(calculateTimeLeft(targetDate));
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [selectedDate]);
 
   const timeBlocks = [
     { label: 'DÍAS', value: timeLeft.days, color: 'text-rose-600' },

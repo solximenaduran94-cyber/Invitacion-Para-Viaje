@@ -44,7 +44,7 @@ He elegido que hagamos nuestra escapada a *${destinationTitle}* ${destinationEmo
 
   const shareOnWhatsApp = () => {
     const text = makeMessageText();
-    const url = `https://api.whatsapp.com/send?text=${text}`;
+    const url = `https://api.whatsapp.com/send?phone=5493512069516&text=${text}`;
     window.open(url, '_blank');
   };
 

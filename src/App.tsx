@@ -15,6 +15,7 @@ import ConfirmationScreen from './components/ConfirmationScreen';
 import ActivitiesGallery from './components/ActivitiesGallery';
 import CountdownTimer from './components/CountdownTimer';
 import SparkleOverlay from './components/SparkleOverlay';
+import juanYMili from './assets/images/juan_y_mili.jpg';
 import { playChime, playHeartbeat, playParchment, startBackgroundSong, stopBackgroundSong } from './utils/audio';
 import { Calendar, Compass, Heart, MapPin, Sparkles, Volume2, VolumeX, Mail } from 'lucide-react';
 
@@ -286,7 +287,7 @@ export default function App() {
 
                   <div className="relative w-full aspect-square overflow-hidden bg-neutral-100 border border-neutral-100 rounded-xs">
                     <img 
-                      src="/images/juan_y_mili.jpg" 
+                      src={juanYMili} 
                       alt="Juan y Mili" 
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover grayscale-15 hover:grayscale-0 transition-all duration-500"

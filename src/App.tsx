@@ -286,7 +286,7 @@ export default function App() {
 
                   <div className="relative w-full aspect-square overflow-hidden bg-neutral-100 border border-neutral-100 rounded-xs">
                     <img 
-                      src="/src/assets/images/juan_y_mili.jpg" 
+                      src="/images/juan_y_mili.jpg" 
                       alt="Juan y Mili" 
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover grayscale-15 hover:grayscale-0 transition-all duration-500"
